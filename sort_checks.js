@@ -18,6 +18,7 @@ const monthMapping = {
 const data = fs.readFileSync('чеки.txt', 'utf-8');
 const dataArray = data.split("\n");
 const paidServices = {};
+const services = ['газоснабжение', 'гвс', 'домофон', 'капремонт', 'квартплата', 'тбо', 'теплоснабжение', 'хвс', 'электроснабжение'];
 
 // Сортировка массива по месяцам
 dataArray.sort((a, b) => {
@@ -45,8 +46,7 @@ dataArray.forEach(file => {
 fs.writeFileSync('чеки_по_папкам.txt', '');
 
 Object.keys(paidServices).forEach(month => {
-    const unpaidServices = ['газоснабжение', 'гвс', 'домофон', 'капремонт', 'квартплата', 'тбо', 'теплоснабжение', 'хвс', 'электроснабжение']
-        .filter(service => !paidServices[month].has(service));
+    const unpaidServices = services.filter(service => !paidServices[month].has(service));
 
     // Добавляем оплаченные услуги в файл
     paidServices[month].forEach(service => {
