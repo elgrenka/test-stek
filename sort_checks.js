@@ -17,8 +17,13 @@ const monthMapping = {
 
 const data = fs.readFileSync('чеки.txt', 'utf-8');
 const dataArray = data.split("\n");
+
+let services = dataArray.map(item => {
+    const [service] = item.split("_");
+    return service.trim().toLowerCase();
+});
+services = Array.from(new Set(services));
 const paidServices = {};
-const services = ['газоснабжение', 'гвс', 'домофон', 'капремонт', 'квартплата', 'тбо', 'теплоснабжение', 'хвс', 'электроснабжение'];
 
 // Сортировка массива по месяцам
 dataArray.sort((a, b) => {
